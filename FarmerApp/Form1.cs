@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace FarmerApp
 {
@@ -27,16 +28,29 @@ namespace FarmerApp
                 var listSt = new List<string>();
                 for (int x = 0; x < checkedListBox1.CheckedItems.Count; x++)
                 {
-                    s = checkedListBox1.CheckedItems[x].ToString() + "\n";
-                    listSt.Add(checkedListBox1.CheckedItems[x].ToString());
+                    s = checkedListBox1.CheckedItems[x].ToString();    
+                    if (!listBox1.Items.Contains(s))
+                    {
+                        listBox1.Items.Add(s);           
+                    }
+
                 }
 
-                if (!listBox1.Items.Contains(s))
+                foreach(var str in listBox1.Items)
                 {
-                    listBox1.Items.Add(s);
+                    listSt.Add(str.ToString());
                 }
-               
-               // MessageBox.Show(s);
+
+                // MessageBox.Show(s);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            foreach (int i in checkedListBox1.CheckedIndices)
+            {
+                checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
+                listBox1.Items.Clear();
             }
         }
     }

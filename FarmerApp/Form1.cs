@@ -7,15 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Linq;
+
+using System.Data.Entity;
 
 namespace FarmerApp
 {
     public partial class Form1 : Form
     {
+        FurmContext db;
+
         public Form1()
         {
             InitializeComponent();
+
+            db = new FurmContext();
+            db.FarmModels.Load();
+
+            var culture = db.FarmModels.Select(x => x.Culture).ToList();
+
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -52,6 +61,11 @@ namespace FarmerApp
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 listBox1.Items.Clear();
             }
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

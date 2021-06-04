@@ -1,4 +1,14 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using System.Data.Entity;
 namespace FarmerApp
 {
     partial class Form1
@@ -29,6 +39,13 @@ namespace FarmerApp
         /// </summary>
         private void InitializeComponent()
         {
+   
+            db = new FurmContext();
+            db.FarmModels.Load();
+
+            var culture = db.FarmModels.Select(x => x.Culture).ToList();
+            var array = culture.ToArray<object>();
+
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -39,28 +56,7 @@ namespace FarmerApp
             // 
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.CheckOnClick = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Баклажан ",
-            "Буряк",
-            "Гарбуз",
-            "Горох",
-            "Диня",
-            "Кавун",
-            "Капуста",
-            "Кабачок",
-            "Квасоля",
-            "Картопля",
-            "Кукурудза",
-            "Морква",
-            "Огірок",
-            "Помідори",
-            "Пшениця",
-            "Редис",
-            "Ріпа",
-            "Соя",
-            "Цибуля",
-            "Часник",
-            "Ячмінь"});
+            this.checkedListBox1.Items.AddRange(array);
             this.checkedListBox1.Location = new System.Drawing.Point(39, 81);
             this.checkedListBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.checkedListBox1.Name = "checkedListBox1";

@@ -39,37 +39,42 @@ namespace FarmerApp
                 for (int x = 0; x < checkedListBox1.CheckedItems.Count; x++)
                 {
                     s = checkedListBox1.CheckedItems[x].ToString();    
-                    if (!listBox1.Items.Contains(s))
+                    if (!comboBox1.Items.Contains(s))
                     {
-                        listBox1.Items.Add(s);
+                    
                         comboBox1.Items.Add(s);
                         listSt.Add(s);
                     }
                 }
-
-        
-
-                // MessageBox.Show(s);
             }
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string selectedState = comboBox1.SelectedItem.ToString();
-
+            var innerList = new List<string>();
             var test = db.FarmModels.ToList();
             var item = test.FindAll(x => x.Culture == selectedState).Select(x => x.Restrictions).FirstOrDefault();
             string[] subs = item.Split(',');
-            foreach (var t  in listSt)
+            foreach (var t in listSt)
             {
-                if(t!=selectedState)
+                if (t != selectedState)
                 {
                     if (!subs.Contains(t))
                     {
                         listBox2.Items.Add(t);
+                        innerList.Add(t);
                     }
-                 
-                }               
-            }        
+                }
+            }
+            listBox1.Items.Add(selectedState);
+            comboBox1.Items.Clear();
+
+            foreach(var il in innerList)
+            {
+                comboBox1.Items.Add(il);
+            }
+          
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,13 +84,6 @@ namespace FarmerApp
                 checkedListBox1.SetItemCheckState(i, CheckState.Unchecked);
                 listBox1.Items.Clear();
             }
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        
+        }        
     }
 }

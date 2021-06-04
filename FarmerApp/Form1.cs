@@ -77,6 +77,16 @@ namespace FarmerApp
                 comboBox1.Items.Add(il);
             }
 
+            if(comboBox1.Items.Count == 0 && listSt.Count > 0)
+            {
+                foreach(var r in listSt)
+                {
+                    listBox3.Items.Add(r);
+                }
+               
+            }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -88,6 +98,22 @@ namespace FarmerApp
                 listBox2.Items.Clear();
                 comboBox1.Items.Clear();
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //C:\Projects\FarmerApp\FarmerApp\bin\Debug\net5.0-windows
+            const string sPath = "culture.txt";
+
+            System.IO.StreamWriter SaveFile = new System.IO.StreamWriter(sPath);
+            foreach (var item in listBox1.Items)
+            {
+                SaveFile.WriteLine(item);
+            }
+
+            SaveFile.Close();
+
+            MessageBox.Show("Programs saved!");
         }
 
 

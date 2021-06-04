@@ -39,17 +39,11 @@ namespace FarmerApp
         /// </summary>
         private void InitializeComponent()
         {
-            db = new FurmContext();
-            db.FarmModels.Load();
-            var culture = db.FarmModels.Select(x => x.Culture).ToList();
-            var array = culture.ToArray<object>();
-            
-
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.checkedListBox1.Items.AddRange(array);
+           
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             
             this.listBox2 = new System.Windows.Forms.ListBox();

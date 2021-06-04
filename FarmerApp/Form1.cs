@@ -22,8 +22,12 @@ namespace FarmerApp
         public Form1()
         {
             InitializeComponent();
+            db = new FurmContext();
             db.FarmModels.Load();
 
+            var culture = db.FarmModels.Select(x => x.Culture).ToList();
+            var array = culture.ToArray<object>();
+            this.checkedListBox1.Items.AddRange(array);
             comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
 
         }
